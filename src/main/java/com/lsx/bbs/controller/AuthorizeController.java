@@ -1,7 +1,9 @@
-package com.lsx.bbs.Controller;
+package com.lsx.bbs.controller;
 
 import com.lsx.bbs.dto.AccessTokenDTO;
 import com.lsx.bbs.dto.GitHubUser;
+import com.lsx.bbs.mapper.UserMapper;
+import com.lsx.bbs.model.User;
 import com.lsx.bbs.provider.GitHubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.UUID;
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
@@ -24,19 +27,13 @@ public class AuthorizeController {
     private String clientUri;
     @Value("${github.client.secret}")
     private String clientSecret;
+    @Autowired
+    private UserMapper userMapper;
 
     @RequestMapping("/callback")
     public String Authorize(@RequestParam(name="code")String code,
                             @RequestParam(name="state")String state,
                             HttpServletRequest request) throws IOException {
-
-//        InputStream is = AuthorizeController.class.getClassLoader().getResourceAsStream("authorize.properties");
-//        Properties prop = new Properties();
-//        prop.load(is);
-
-//        accessTokenDTO.setClient_id(prop.getProperty("client_id"));
-//        accessTokenDTO.setRedirect_uri(prop.getProperty("uri"));
-//        accessTokenDTO.setClient_secret(prop.getProperty("client_secret"));
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
@@ -45,12 +42,19 @@ public class AuthorizeController {
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
-        GitHubUser user = gitHubProvider.getUser(accessToken);
-        if(user != null){
+        GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
+
+        if(gitHubUser != null){
+            User user = new User();
+            user.setToken(accessToken);
+            user.setId(gitHubUser.getId());
+            user.setName(gitHubUser.getName());
+            user.setGmt_create(System.currentTimeMillis());
+            user.setGmt_modified(user.getGmt_create());
+            userMapper.insert(user);
             request.getSession().setAttribute("user",user.getName());
             return "redirect:main";
         }
-
 
         return "redirect:main";
     }

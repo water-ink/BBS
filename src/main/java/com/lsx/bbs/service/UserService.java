@@ -24,6 +24,9 @@ public class UserService {
         this.gitHubUser = gitHubUser;
     }
     public int addUser() throws SQLException {
-        return userDao.insert(gitHubUser);
+        return userDao.insertUser(gitHubUser);
+    }
+    public int deleteUser() throws Exception {
+        return userDao.deleteUserById(gitHubUser);
     }
 }
