@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -33,7 +35,8 @@ public class AuthorizeController {
     @RequestMapping("/callback")
     public String Authorize(@RequestParam(name="code")String code,
                             @RequestParam(name="state")String state,
-                            HttpServletRequest request) throws IOException {
+                            HttpServletRequest request,
+                            HttpServletResponse response) throws IOException {
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
@@ -52,6 +55,7 @@ public class AuthorizeController {
             user.setGmt_create(System.currentTimeMillis());
             user.setGmt_modified(user.getGmt_create());
             userMapper.insert(user);
+            response.addCookie(new Cookie("token",accessToken));
             request.getSession().setAttribute("user",user.getName());
             return "redirect:main";
         }

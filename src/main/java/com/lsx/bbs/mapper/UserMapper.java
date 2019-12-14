@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     @Insert("INSERT INTO github_user(userId,userName,token,gmt_create,gmt_modified) values(#{id},#{name},#{token},#{gmt_create},#{gmt_modified})")
     public void insert(User user);
-    @Select("select * from github_user where userId=#{id}")
-    public User select(long id);
+    @Select("select * from github_user where token=#{token}")
+    public User select(String token);
 }
