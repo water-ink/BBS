@@ -1,0 +1,1 @@
+alter table github_user add bio nvarchar(256) null;

@@ -3,7 +3,6 @@ package com.lsx.bbs.controller;
 import com.lsx.bbs.mapper.UserMapper;
 import com.lsx.bbs.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
