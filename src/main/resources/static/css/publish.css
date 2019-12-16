@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    width: 80%;
+    height: 100%;
+}
+.col-lg-9{
+    padding-bottom: 18px;
+}
+.label-tag{
+    margin-top: 18px;
+}
+.btn-publish {
+    margin-top: 18px;
+    float: right;
+}

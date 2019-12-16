@@ -9,3 +9,5 @@
 [Visual Paradigm](https://www.visual-paradigm.com)
 
 [Git](https://git-scm.com)
+
+[Flyway](https://mvnrepository.com/artifact/org.flywaydb/flyway-core)
