@@ -15,22 +15,23 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.UUID;
 
-@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 public class AuthorizeController {
 
-    @Autowired
-    private GitHubProvider gitHubProvider;
+    private final GitHubProvider gitHubProvider;
     @Value("${github.client.id}")
     private String clientId;
     @Value("${github.client.uri}")
     private String clientUri;
     @Value("${github.client.secret}")
     private String clientSecret;
+    private final UserMapper userMapper;
     @Autowired
-    private UserMapper userMapper;
+    public AuthorizeController(GitHubProvider gitHubProvider, UserMapper userMapper) {
+        this.gitHubProvider = gitHubProvider;
+        this.userMapper = userMapper;
+    }
 
     @RequestMapping("/callback")
     public String Authorize(@RequestParam(name="code")String code,

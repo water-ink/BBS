@@ -2,7 +2,6 @@ package com.lsx.bbs.controller;
 
 import com.lsx.bbs.mapper.UserMapper;
 import com.lsx.bbs.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,9 +13,15 @@ import javax.servlet.http.HttpServletRequest;
  * @Author:lsx
  * @Date:2019/12/14
  */
+
 @Controller
 public class FastLoginController {
-    @Autowired private UserMapper userMapper;
+    private final UserMapper userMapper;
+
+    public FastLoginController(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     @RequestMapping("/")
     public String fastLogin(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
