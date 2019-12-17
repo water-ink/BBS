@@ -27,6 +27,7 @@ public class AuthorizeController {
     @Value("${github.client.secret}")
     private String clientSecret;
     private final UserMapper userMapper;
+
     @Autowired
     public AuthorizeController(GitHubProvider gitHubProvider, UserMapper userMapper) {
         this.gitHubProvider = gitHubProvider;
