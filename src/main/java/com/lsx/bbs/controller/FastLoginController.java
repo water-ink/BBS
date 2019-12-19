@@ -29,8 +29,10 @@ public class FastLoginController {
             if("token".equals(cookie.getName())){
                 String token = cookie.getValue();
                 User user = userMapper.select(token);
-                if (user != null)
-                    return "main";
+                if (user != null){
+                    request.getSession().setAttribute("user",user.getName());
+                    return "redirect:/main";
+                }
                 else
                     break;
             }

@@ -6,26 +6,26 @@ package com.lsx.bbs.model;
  * @Date:2019/12/13
  */
 public class User {
-    private long id;
-    private String name;
+    private long userId;
+    private String userName;
     private String token;
     private Long gmt_create;
     private Long gmt_modified;
 
     public long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getToken() {
