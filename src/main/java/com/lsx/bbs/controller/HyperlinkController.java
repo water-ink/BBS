@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class HyperlinkController {
-    @GetMapping("/publish")
+    @GetMapping("/publish_page")
     public String publish(){
         return "publish";
     }

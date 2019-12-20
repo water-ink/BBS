@@ -6,7 +6,7 @@ package com.lsx.bbs.model;
  * @Date:2019/12/19
  */
 public class Question {
-    private Integer id;
+    private Long id;
     private String title;
     private String description;
     private String tag;
@@ -17,11 +17,11 @@ public class Question {
     private Integer commentCount;
     private Integer likeCount;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

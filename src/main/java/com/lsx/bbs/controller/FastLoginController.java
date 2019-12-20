@@ -31,6 +31,7 @@ public class FastLoginController {
                 User user = userMapper.select(token);
                 if (user != null){
                     request.getSession().setAttribute("user",user.getName());
+                    request.getSession().setAttribute("id",user.getId());
                     return "redirect:/main";
                 }
                 else
