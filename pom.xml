@@ -90,7 +90,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:mysql://106.54.97.32:3306/Lsx</url>
+                    <url>jdbc:mysql://106.54.97.32:3300/Lsx</url>
                     <user>root</user>
                     <password>123456</password>
                 </configuration>
